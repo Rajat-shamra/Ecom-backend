@@ -77,7 +77,7 @@ exports.getAllProducts = async(req,res)=>{
 
     const categoryid = req.query.categoryid || ""
     const page = req.query.page || 1;
-    const ITEM_PER_PAGE = 6;
+    const ITEM_PER_PAGE = 8;
 
     const query = {}
 

@@ -16,9 +16,4 @@ router.delete("/removeiteams/:id",userauthenticate,cartsControllers.removeAllite
 router.delete("/removecartdata",userauthenticate,cartsControllers.DeleteCartsData);
 
 
-
-
-
-
-
 module.exports = router;
