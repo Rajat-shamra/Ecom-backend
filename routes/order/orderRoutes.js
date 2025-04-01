@@ -11,9 +11,7 @@ router.get("/getuserorders",userauthenticate,orderController.getUserOrders);
 
 // for admin
 router.get("/orders",adminauthenticate,orderController.getAllOrders);
-router.put("/orders/:orderid",adminauthenticate,orderController.updateOrderStatus);
-
-
+router.put("/orders/:orderid",adminauthenticate,orderController.updateOrderStatus)
 
 
 module.exports = router;
