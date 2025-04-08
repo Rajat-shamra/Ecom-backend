@@ -9,42 +9,6 @@ const ejs = require("ejs");
 const {transporter} = require("../../helper");
 const usercontactDB = require("../../model/user/userContactModel");
 
-
-// register
-// exports.userRegister = async (req, res) => {
-//     const { firstname, lastname, email, password, confirmpassword } = req.body;
-
-
-//     if (!firstname || !email || !lastname || !password || !confirmpassword || !req.file) {
-//         res.status(400).json({ error: "all fileds are required" })
-//     }
-
-//     const file = req.file?.path;
-//     const upload = await cloudinary.uploader.upload(file);
-
-//     try {
-//         const preuser = await userDB.findOne({email:email});
-
-//         if(preuser){
-//             res.status(400).json({error:"this user is already existssssssssssss"});
-//             console.log("errorrrrrrrr");
-            
-//         }else if(password !== confirmpassword){
-//             res.status(400).json({error:"password and confirm password not match"});
-//         }else{
-//             const userData = new userDB({
-//                 firstname, lastname, email, password, userprofile:upload.secure_url
-//             });
-
-//             // here password hashing
-
-//             await userData.save();
-//             res.status(200).json(userData);
-//         }
-//     } catch (error) {
-//         res.status(400).json(error)
-//     }
-// }
 exports.userRegister = async (req, res) => {
     const { firstname, lastname, email, password, confirmpassword } = req.body;
 
@@ -185,7 +149,7 @@ exports.forgotpassword = async(req,res)=>{
             
             // Set token and logo value in ejs file
             const data = {
-                passwordresetlink:`http://localhost:3000/resetpassword/${userfind.id}/${setusertoken.verifytoken}`,
+                passwordresetlink:`https://ecom-frontend-beta-three.vercel.app/resetpassword/${userfind.id}/${setusertoken.verifytoken}`,
                 logo:"https://cdn-icons-png.flaticon.com/128/732/732200.png"
             }
             // set dynamic datavalue in ejs
