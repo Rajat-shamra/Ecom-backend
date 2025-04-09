@@ -142,7 +142,7 @@ exports.forgotpassword = async(req,res)=>{
             // join email path
             // const emailTemplatepath = path.join(__dirname,"../../EmailTemplate/Forgottemplate.ejs");
             const emailTemplatepath = path.resolve(__dirname, "..", "..", "EmailTemplate", "Forgottemplate.ejs");
-
+            console.log("Looking for EJS template at:", emailTemplatepath);
             const emailtemplateread = fs.readFileSync(emailTemplatepath,"utf8");
 
             console.log("sssssssss",__dirname)
