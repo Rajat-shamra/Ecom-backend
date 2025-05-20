@@ -11,6 +11,7 @@ router.post("/login",userController.login);
 
 router.get("/userloggedin",userauthenticate,userController.userverify);
 router.get("/logout",userauthenticate,userController.logout);
+router.put('/edituser/:userId',userUpload.single('userprofile') , userController.updateUser)
 
 router.post("/forgotpassword",userController.forgotpassword);
 // user verify for forgotpassword

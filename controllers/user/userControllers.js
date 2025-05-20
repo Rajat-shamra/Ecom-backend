@@ -74,7 +74,6 @@ exports.login = async (req, res) => {
             if(!isMatch){
                 res.status(400).json({error:"Invalid Details"})
             }else{
-
                 // token generate
                 const token = await userValid.generateuserAuthToken();
 
@@ -94,7 +93,6 @@ exports.login = async (req, res) => {
 }
 
 // userverify
-
 exports.userverify = async(req,res)=>{
     try {
         const verifyUser = await userDB.findOne({_id:req.userId});
@@ -103,6 +101,49 @@ exports.userverify = async(req,res)=>{
         res.status(400).json(error)
     }
 }
+
+
+exports.updateUser = async (req, res) => {
+    const userId = req.params.userId;
+    const { firstname, lastname } = req.body;
+
+    console.log("userId:", userId);
+    console.log("firstname:", firstname);
+    console.log("lastname:", lastname);
+    console.log("file:", req.file);
+
+    try {
+        const user = await userDB.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        if (req.file) {
+            try {
+                const upload = await cloudinary.uploader.upload(req.file.path);
+                user.userprofile = upload.secure_url;
+            } catch (uploadError) {
+                return res.status(500).json({ error: "File upload failed", details: uploadError.message });
+            }
+        }
+        
+          
+
+        if (firstname) user.firstname = firstname;
+        if (lastname) user.lastname = lastname;
+
+        await user.save();
+
+        return res.status(200).json({ message: "User updated successfully", user });
+
+    } catch (error) {
+        console.error("Error updating user:", error);
+        return res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+};
+
+
+
 
 // logout
 exports.logout = async(req,res)=>{
