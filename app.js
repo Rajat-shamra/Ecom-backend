@@ -3,11 +3,18 @@ const express = require("express");
 const app = express();
 require("./db/conn");
 const cors = require("cors");
+const googleauth = require('./GoogleAuth/googleauth')
+googleauth(app)
+// Other middleware
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
 const port = 4009 
 
-
-app.use(cors());
 app.use(express.json());
+
+// https://ecom-backend-iie5.onrender.com
 
 // admin routes
 const adminAuthroutes = require("./routes/admin/adminAuthroutes");
