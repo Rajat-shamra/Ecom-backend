@@ -6,9 +6,14 @@ const cors = require("cors");
 const googleauth = require('./GoogleAuth/googleauth')
 googleauth(app)
 // Other middleware
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://ecom-frontend-beta-three.vercel.app'
+];
+
 app.use(cors({
-  origin: true,
-  credentials: true,
+  origin: allowedOrigins,
+  credentials: true, // only if using cookies/session
 }));
 const port = 4009 
 
