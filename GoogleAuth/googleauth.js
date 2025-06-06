@@ -1,4 +1,5 @@
 // googleAuth.js
+require('dotenv').config()
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const session = require("express-session");
@@ -7,12 +8,16 @@ const userDb = require("../model/user/userModel");
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_SECRET_KEY= process.env.GOOGLE_SECRET_KEY;
 const SECRET_KEY = process.env.USER_SECRET_KEY;
-const FRONTEND_DEV_URL = process.env.FRONTEND_DEV_URL;
-const FRONTEND_PROD_URL = process.env.FRONTEND_PROD_URL;
-const Node_Env = process.env.NODE_ENV;
 
-// const Redirect_Url = Node_Env === "development" ?    FRONTEND_DEV_URL : FRONTEND_PROD_URL;
-const Redirect_Url =  FRONTEND_DEV_URL;
+ 
+
+const Redirect_Url = process.env.NODE_ENV === "development"
+  ? process.env.FRONTEND_DEV_URL
+  : process.env.FRONTEND_PROD_URL;
+
+console.log(`Redirect url` , Redirect_Url);
+
+// const Redirect_Url =  FRONTEND_DEV_URL;
 
 
 function configureGoogleAuth(app) {
